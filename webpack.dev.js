@@ -4,9 +4,20 @@ const { merge } = require('webpack-merge');
 
 module.exports = merge(common, {
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dev'),
     filename: 'bundle.js',
     clean: true,
   },
   mode: 'development',
+  devtool: 'source-map',
+  devServer: {
+    static: {
+      directory: path.resolve(__dirname, 'dev'),
+    },
+    port: 3000,
+    open: true,
+    hot: true,
+    compress: true,
+    historyApiFallback: true,
+  },
 });
