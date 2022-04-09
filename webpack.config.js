@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { NONAME } = require('dns');
+const postcssPresetEnv = require('postcss-preset-env');
 
 module.exports = {
   // This tells webpack what version js it is going to result
@@ -76,12 +76,17 @@ module.exports = {
           'style-loader',
           'css-loader',
 
-          // Post css with autoprefixer plugin adds vender prefixes to css properties
+          // Post css with postcssPresetEnv plugin adds vender prefixes, and more to css properties
           {
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                plugins: [require('autoprefixer')],
+                plugins: [
+                  postcssPresetEnv({
+                    browsers: 'last 2 versions',
+                    autoprefixer: { grid: true },
+                  }),
+                ],
               },
             },
           },
