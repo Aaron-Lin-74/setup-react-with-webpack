@@ -12,7 +12,31 @@ module.exports = {
   // This saves us from having to add a mode flag when we run the development server.
   mode: 'development',
 
-  //This property defines the file path and the file name which will be used for deploying the bundled file
+  // For easier debugging
+  devtool: 'source-map',
+
+  // Config the dev server
+  devServer: {
+    static: {
+      directory: path.resolve(__dirname, 'dist'),
+    },
+    port: 3000,
+
+    // Move the command flag here as well
+    // Tells dev-server to open the browser after server had been started.
+    open: true,
+
+    // Enable webpack's Hot Module Replacement
+    hot: true,
+
+    // Enable gzip compression for everything served
+    compress: true,
+
+    // Allows to proxy requests through a specified index page.
+    // Useful for Single Page Applications that utilise the HTML5 History API.
+    historyApiFallback: true,
+  },
+  // This property defines the file path and the file name which will be used for deploying the bundled file
   output: {
     path: path.resolve(__dirname, 'dist'),
 
@@ -21,6 +45,9 @@ module.exports = {
 
     // Clean the dist folder before each build
     clean: true,
+
+    // Maintain the original name of asset
+    assetModuleFilename: 'images/[name][ext][query]',
   },
 
   //Setup loaders
@@ -33,6 +60,8 @@ module.exports = {
 
         // exclude: /node_modules/,
         include: path.resolve(__dirname, 'src'),
+
+        // We can optionally move preset rules from .babelrc to here
         use: {
           loader: 'babel-loader',
         },
@@ -59,6 +88,12 @@ module.exports = {
           // Compiles Sass to CSS
           'sass-loader',
         ],
+      },
+
+      // The rule for images, using Asset Module
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
       },
     ],
   },
