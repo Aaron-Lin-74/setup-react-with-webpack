@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { camelCase } from 'lodash';
 import './App.css';
 import './App.scss';
+import logo from '../assets/images/logo192.png';
 
 class App extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class App extends Component {
         <button className='btn btn-primary' onClick={() => this.handleClick()}>
           Click me
         </button>
-        <img src='/images/logo192.png' />
+        <img src={logo} />
       </div>
     );
   }
