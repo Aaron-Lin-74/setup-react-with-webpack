@@ -72,7 +72,20 @@ module.exports = {
         test: /\.css$/i,
 
         // Loaded in reverse order
-        use: ['style-loader', 'css-loader'],
+        use: [
+          'style-loader',
+          'css-loader',
+
+          // Post css with autoprefixer plugin adds vender prefixes to css properties
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [require('autoprefixer')],
+              },
+            },
+          },
+        ],
       },
 
       // The rule about processing scss file

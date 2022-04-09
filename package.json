@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "devbuild": "webpack",
-    "start": "webpack-dev-server --config webpack.dev.js --open --hot",
+    "devbuild": "webpack --config webpack.dev.js",
+    "start": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js"
   },
   "author": "",
@@ -19,12 +19,15 @@
   "devDependencies": {
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
+    "autoprefixer": "^10.4.4",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.2.4",
     "bootstrap": "^5.1.3",
     "css-loader": "^6.7.1",
     "html-loader": "^3.1.0",
     "html-webpack-plugin": "^5.5.0",
+    "postcss": "^8.4.12",
+    "postcss-loader": "^6.2.1",
     "sass": "^1.50.0",
     "sass-loader": "^12.6.0",
     "style-loader": "^3.3.1",
