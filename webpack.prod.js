@@ -3,6 +3,7 @@ const common = require('./webpack.common');
 const { merge } = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const postcssPresetEnv = require('postcss-preset-env');
 
 module.exports = merge(common, {
@@ -60,7 +61,18 @@ module.exports = merge(common, {
     ],
   },
   optimization: {
-    minimizer: [`...`, new CssMinimizerPlugin()],
+    minimizer: [
+      `...`,
+      new CssMinimizerPlugin(),
+      new HtmlWebpackPlugin({
+        template: './public/index.html',
+        minify: {
+          removeAttributeQuotes: true,
+          collapseWhitespace: true,
+          removeComments: true,
+        },
+      }),
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin({
